@@ -1,0 +1,42 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #e8edf7;
+  background: #0a0d14;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: #0a0d14;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #9b8cff;
+  outline-offset: 3px;
+}
+
+::selection {
+  color: white;
+  background: #6c5ce7;
+}
+
+#root {
+  min-height: 100vh;
+}

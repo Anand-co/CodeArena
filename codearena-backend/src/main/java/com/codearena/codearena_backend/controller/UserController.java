@@ -1,0 +1,44 @@
+
+package com.codearena.codearena_backend.controller;
+
+import com.codearena.codearena_backend.entity.User;
+import com.codearena.codearena_backend.repository.UserRepository;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/auth")
+public class UserController {
+
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<Map<String, Object>> getCurrentUser(
+            Authentication authentication) {
+
+        User user = userRepository
+                .findByEmailIgnoreCase(authentication.getName())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "User not found"));
+
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
+                "username", user.getUsername(),
+                "email", user.getEmail(),
+                "role", user.getRole().name()
+        ));
+    }
+}
